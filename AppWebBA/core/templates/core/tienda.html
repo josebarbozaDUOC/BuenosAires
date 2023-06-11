@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'core/css/forms.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <h1 style="color: blue !important; font-weight: bolder;">Aires Acondicionados Buenos Aires</h1>
+    {% if lista %}
+        <div class="row text-center">
+        {% for producto in lista %}
+        {% if producto.estado == 'En bodega' %}
+            <a href="{% url 'ficha' producto.idprod %}">
+                {% endif %}
+                <div class="tienda_auto_recuadro">
+                    <div class="tienda_auto_recuadro_interior">
+                        <img src="/media/{{ producto.imagen }}" class="tienda_auto_imagen" alt="">
+                    </div>
+                    <div>        
+                        <br>
+                        {% if producto.estado == 'En bodega' %}
+                        <h6>Disponible</h6>
+                        <br>
+                        {{ producto.nomprod }}
+                        <br>
+                        {{ producto.descprod }}
+                        <br>
+                        ${{ producto.precio }}
+                        {% endif %}
+                        {% if producto.estado == 'Vendido' %}
+                        <h6>Agotado</h6>
+                        <br>
+                        {{ producto.nomprod }}
+                        <br>
+                        {{ producto.descprod }}
+                        <br>
+                        ${{ producto.precio }}
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endblock content %}

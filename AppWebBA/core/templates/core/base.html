@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>Aires Acondicionados Buenos Aires</title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{% static 'core/img/favicon.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    {% block stylesheet %} {% endblock %}
+</head>
+<body>
+    {% block navbar %}
+        <script>
+            $(document).ready(function(){
+                set_nav_li("#inicio", "{% url 'home' %}");
+                set_nav_li("#tienda", "{% url 'tienda' %}");
+                set_nav_li("#admsis", "{% url 'admin:index' %}");
+                set_nav_li("#manpro", "{% url 'administrar_productos' 'ins' '-1' %}");
+                set_nav_li("#regist", "{% url 'registrar_usuario' %}");
+                set_nav_li("#solser", "{% url 'obtener_solicitudes_de_servicio' %}");
+                set_nav_li("#inises", "{% url 'iniciar_sesion' %}");
+                set_nav_li("#cerses", "{% url 'cerrar_sesion' %}");
+                set_nav_li("#perfil", "{% url 'perfil_usuario' %}");
+                set_nav_li("#chpass", "{% url 'cambiar_password' %}");
+                set_nav_li("#hiscom", "{% url 'obtener_facturas' %}");
+
+                function set_nav_li(id, url, img) {
+                    $(id).addClass('nav-item list-inline-item align-center nav_item_text');
+                    name = $(id).html();
+                    $(id).html('');
+                    //$(id).append(`<a href="${url}"><img class="img_menu" src="${img}">${name}</a>`)
+                    $(id).append(`<a href="${url}">${name}</a>`)
+                }
+            });
+        </script>
+        <nav id="navbar">
+            <div id="nav">
+                <ul class="list-inline">
+                    <!-- inicio menú para usuarios anónimos -->
+                    <li id="inicio">Inicio</li>    
+                    <!-- fin menú para usuarios anónimos -->
+                    {% if not user.is_authenticated %}
+                    <li id="inises">Ingresar</li>
+                    {% endif %}
+
+                    {% if user.is_authenticated and tipousu == 'Administrador' %}
+                        <li id="hiscom">Historial de ventas</li>
+                        <li id="solser">Todas las solicitudes</li>
+                    {% endif %}
+
+                    {% if user.is_authenticated and tipousu == 'Bodeguero' %}
+                    <li id="manpro">Administrar productos</li>
+                {% endif %}
+
+                    {% if user.is_authenticated and tipousu == 'Técnico' %}
+                    <li id="solser">Mis solicitudes</li>
+                    {% endif %}
+
+                    {% if user.is_authenticated and tipousu == 'Cliente' %}
+                        <li id="hiscom">Mis compras</li>
+                        <li id="solser">Mis solicitudes</li>
+                    {% endif %}
+                    
+                    {% if not user.is_authenticated %}
+                        <li id="regist">Registrarse</li>
+                    {% endif %}
+                    
+
+
+                    {% if user.is_authenticated %}
+                        <li id="perfil">Mis datos</li>
+                        <li id="cerses">Cerrar sesión</li>
+
+                    {% endif %}
+                    
+                </ul>
+            </div>                                 
+        </nav>
+        <hr>
+    {% endblock %}
+
+    <div class="content container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="text-center">
+            <hr>
+            <br><br><br>
+            <span><a href="http://127.0.0.1:8000/admin" class="btn btn-info btn-sm">Administrar sistema</a></span>
+        </div>
+        <div class="text-left" style="font-family: 'Courier New', Courier, monospace; font-weight: bold;">
+            <span style="color: blue; font-style: bolder;"> USUARIOS: </span> <br>
+            Superusuario &nbsp;: admin <br>
+            Administrador : emusk <br>
+            Cliente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : atorres, jperez, mayala, jsoto, pmora <br>
+            Técnico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : jgatica, mvera, pdiazduoc <br>
+            Bodeguero &nbsp;&nbsp;&nbsp; : creyes
+        </div>
+    </footer>
+</body>
+</html>
