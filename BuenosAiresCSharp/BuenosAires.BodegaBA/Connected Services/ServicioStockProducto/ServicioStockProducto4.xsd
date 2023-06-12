@@ -123,49 +123,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PerfilUsuarioLeerTodos">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="PerfilUsuarioLeerTodosResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="PerfilUsuarioLeerTodosResult" nillable="true" type="q14:Respuesta" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="VerificarPassword">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="cuenta" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="VerificarPasswordResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="VerificarPasswordResult" nillable="true" type="q15:Respuesta" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ValidarLoginEscritorio">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="cuenta" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="tipousu" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ValidarLoginEscritorioResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ValidarLoginEscritorioResult" nillable="true" type="q16:Respuesta" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="ObtenerGuiasDespacho">
     <xs:complexType>
       <xs:sequence />
@@ -174,7 +131,22 @@
   <xs:element name="ObtenerGuiasDespachoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ObtenerGuiasDespachoResult" nillable="true" type="q17:Respuesta" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ObtenerGuiasDespachoResult" nillable="true" type="q14:Respuesta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModificarEstadoGuiaDespacho">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nro" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="estado" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModificarEstadoGuiaDespachoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ModificarEstadoGuiaDespachoResult" nillable="true" type="q15:Respuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -186,7 +158,21 @@
   <xs:element name="ObtenerEquiposAnwoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ObtenerEquiposAnwoResult" nillable="true" type="q18:Respuesta" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ObtenerEquiposAnwoResult" nillable="true" type="q16:Respuesta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReservarEquipoAnwo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nroserie" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReservarEquipoAnwoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="ReservarEquipoAnwoResult" nillable="true" type="q17:Respuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

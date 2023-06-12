@@ -17,6 +17,7 @@ namespace BuenosAires.BusinessLayer
         public List<StockProducto> Lista = null;
         public List<StockProductoConEstado> ListaConEstados = null;
         public List<GuiaDespachoConEstado> ListaGuias = null;
+        public EquiposAnwo EquiposAnwo = null;
         public List<EquiposAnwo> ListaEquiposAnwo = null;
 
         public BcStockProducto()
@@ -33,6 +34,7 @@ namespace BuenosAires.BusinessLayer
             this.Lista = new List<StockProducto>();
             this.ListaConEstados = new List<StockProductoConEstado>();
             this.ListaGuias = new List<GuiaDespachoConEstado>();
+            this.EquiposAnwo = new EquiposAnwo();
             this.ListaEquiposAnwo = new List<EquiposAnwo>();
         }
 
@@ -45,6 +47,7 @@ namespace BuenosAires.BusinessLayer
             this.Lista = dc.Lista;
             this.ListaConEstados = dc.ListaConEstados;
             this.ListaGuias = dc.ListaGuias;
+            this.EquiposAnwo = dc.EquiposAnwo;
             this.ListaEquiposAnwo = dc.ListaEquiposAnwo;
         }
 
@@ -101,6 +104,20 @@ namespace BuenosAires.BusinessLayer
         {
             var dc = new DcStockProducto();
             dc.Eliminar(id);
+            this.CopiarPropiedades(dc);
+        }
+
+        //ANWO
+        public void ObtenerEquiposAnwo()
+        {
+            var dc = new DcStockProducto();
+            dc.ObtenerEquiposAnwo();
+            this.CopiarPropiedades(dc);
+        }
+        public void ReservarEquipoAnwo(string nroserie)
+        {
+            var dc = new DcStockProducto();
+            dc.ReservarEquipoAnwo(nroserie);
             this.CopiarPropiedades(dc);
         }
     }

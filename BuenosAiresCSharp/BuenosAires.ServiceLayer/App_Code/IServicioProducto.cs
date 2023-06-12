@@ -67,16 +67,24 @@ public class Respuesta
 	public string XmlStockProducto { get; set; }
 	[DataMember]
 	public string XmlListaStockProducto { get; set; }
+
+	[DataMember]
+	public string XmlEquipoAnwo { get; set; }
+	[DataMember]
+	public string XmlListaEquipoAnwo { get; set; }
+
 	[DataMember]
 	public string JsonProducto { get; set; }
 	[DataMember]
 	public string JsonListaProducto { get; set; }
 	[DataMember]
-	public string JsonVerificarPassword { get; set; }
-	[DataMember]
 	public string JsonValidarLoginEscritorio { get; set; }
 	[DataMember]
 	public string ObtenerGuiasDespacho { get; set; }
 	[DataMember]
+	public string ModificarEstadoGuiaDespacho{ get; set; }
+	[DataMember]
 	public string ObtenerEquiposAnwo { get; set; }
+	[DataMember]
+	public string ReservarEquipoAnwo { get; set; }
 }

@@ -7,12 +7,15 @@
       <xs:element minOccurs="0" name="JsonListaProducto" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="JsonProducto" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="JsonValidarLoginEscritorio" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="JsonVerificarPassword" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Mensaje" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModificarEstadoGuiaDespacho" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ObtenerEquiposAnwo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ObtenerGuiasDespacho" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReservarEquipoAnwo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="XmlEquipoAnwo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="XmlFactura" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="XmlGuiaDespacho" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="XmlListaEquipoAnwo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="XmlListaFactura" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="XmlListaGuiaDespacho" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="XmlListaPerfilUsuario" nillable="true" type="xs:string" />

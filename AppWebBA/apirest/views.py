@@ -19,6 +19,7 @@ from django.db import connection
 from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate
+from django.db import transaction
 
 class producto_create(APIView):
     def post(self, request, format=None):
@@ -197,23 +198,14 @@ def reservar_equipo_anwo(request, nroserie):
         cursor.execute("EXEC SP_RESERVAR_EQUIPO_ANWO %s", (nroserie,))
         return JsonResponse({'message': 'Equipo actualizado correctamente.'})
     
-#estado_despachado_guia_de_despacho
+#modificar_estado_guia_de_despacho
 @csrf_exempt
 @api_view(['PUT'])
-def estado_despachado_guia_de_despacho(request, nro):
+def modificar_estado_guia_de_despacho(request, nro, estado):
     if request.method == 'PUT':
         cursor = connection.cursor()
-        cursor.execute("EXEC SP_ESTADO_DESPACHADO_GUIA_DE_DESPACHO %s", (nro,))
-        return JsonResponse({'message': 'Guía de Despacho actualizada correctamente.'})
-    
-#estado_entregado_guia_de_despacho
-@csrf_exempt
-@api_view(['PUT'])
-def estado_entregado_guia_de_despacho(request, nro):
-    if request.method == 'PUT':
-        cursor = connection.cursor()
-        cursor.execute("EXEC SP_ESTADO_ENTREGADO_GUIA_DE_DESPACHO %s", (nro,))
-        return JsonResponse({'message': 'Guía de Despacho actualizada correctamente.'})
+        cursor.execute("EXEC SP_MODIFICAR_ESTADO_GUIA_DE_DESPACHO %s, %s", [nro, estado])
+        return JsonResponse({'message': 'Equipo actualizado correctamente.'})
       
 @csrf_exempt
 @api_view(['GET'])

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7241749e-5c4f-4408-9d70-415a6744b143" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4795/ServicioValidarLogin.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioValidarLogin.xsd" MetadataType="Schema" ID="a55203ff-aaad-42ab-9af4-37efa03bf384" SourceId="1" SourceUrl="http://localhost:4795/ServicioValidarLogin.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioValidarLogin1.xsd" MetadataType="Schema" ID="2689229e-4a2e-4b9b-894f-510ddc8ebbd2" SourceId="1" SourceUrl="http://localhost:4795/ServicioValidarLogin.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioValidarLogin2.xsd" MetadataType="Schema" ID="0a3d896e-946b-4dbe-ac13-3b16493c0c78" SourceId="1" SourceUrl="http://localhost:4795/ServicioValidarLogin.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioValidarLogin.disco" MetadataType="Disco" ID="99186d37-1c8e-4329-9721-fbfaddab6864" SourceId="1" SourceUrl="http://localhost:4795/ServicioValidarLogin.svc?disco" />
+    <MetadataFile FileName="ServicioValidarLogin.wsdl" MetadataType="Wsdl" ID="f22cdff9-bcfd-4127-85d2-92bc83fead92" SourceId="1" SourceUrl="http://localhost:4795/ServicioValidarLogin.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

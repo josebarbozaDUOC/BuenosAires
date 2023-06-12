@@ -39,16 +39,12 @@ public interface IServicioStockProducto
 	Respuesta ProductosLeerTodosEnJson();
 
 	[OperationContract]
-	Respuesta PerfilUsuarioLeerTodos();
-
-	[OperationContract]
-	Respuesta VerificarPassword(string cuenta, string password);
-
-	/*[OperationContract]
-	Respuesta ValidarLoginEscritorio(string cuenta, string password, string tipousu);*/
-
-	[OperationContract]
 	Respuesta ObtenerGuiasDespacho();
+
+	[OperationContract]
+	Respuesta ModificarEstadoGuiaDespacho(string nro, string estado);
 	[OperationContract]
 	Respuesta ObtenerEquiposAnwo();
+	[OperationContract]
+	Respuesta ReservarEquipoAnwo(string nroserie);
 }

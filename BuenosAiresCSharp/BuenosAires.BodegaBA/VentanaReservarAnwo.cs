@@ -15,7 +15,6 @@ namespace BuenosAires.BodegaBA
 {
     public partial class VentanaReservarAnwo : Form
     {
-        private const string connectionString = "Data Source=DESKTOP-ESOHJKV\\MSSQLSERVERDUOC;Initial Catalog=base_datos;user id=sa;password=123;";
         private List<EquiposAnwo> equiposAnwo;
 
         public VentanaReservarAnwo()
@@ -40,22 +39,18 @@ namespace BuenosAires.BodegaBA
 
         private void MostrarEquiposAnwoApi()
         {
+            //Consume Servicio Anwo Soap
             var ws = new ServicioStockProductoClient();
             ws.InnerChannel.OperationTimeout = new TimeSpan(1, 0, 0);
             Respuesta respuesta = ws.ObtenerEquiposAnwo();
-            if (respuesta.Mensaje != "")
-            {
-                Util.MostrarMensaje(respuesta.Mensaje, respuesta.HayErrores);
-            }
-            else
-            {
-                equiposAnwo = JsonConvert.DeserializeObject<List<EquiposAnwo>>(respuesta.ObtenerEquiposAnwo);
-                dgvEquiposAnwo.DataSource = equiposAnwo;
-                dgvEquiposAnwo.Refresh();
-                dgvEquiposAnwo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-                AgregarBotonesReservar();
-            }
+            if (respuesta.Mensaje != "") Util.MostrarMensaje(respuesta.Mensaje, respuesta.HayErrores);
+            equiposAnwo = Util.DeserializarXML<List<EquiposAnwo>>(respuesta.XmlListaEquipoAnwo);
+
+            dgvEquiposAnwo.DataSource = equiposAnwo;
+            dgvEquiposAnwo.Refresh();
+            dgvEquiposAnwo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            AgregarBotonesReservar();
         }
 
         private void AgregarBotonesReservar()
@@ -87,17 +82,11 @@ namespace BuenosAires.BodegaBA
 
         private void CambiarEstadoReservado(string nroserie)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("SP_RESERVAR_EQUIPO_ANWO", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@nroserie", nroserie);
-                    command.ExecuteNonQuery();
-                }
-            }
+            //Consume Servicio Anwo Soap
+            var ws = new ServicioStockProductoClient();
+            ws.InnerChannel.OperationTimeout = new TimeSpan(1, 0, 0);
+            Respuesta respuesta = ws.ReservarEquipoAnwo(nroserie);
+            if (respuesta.Mensaje != "") Util.MostrarMensaje(respuesta.Mensaje, respuesta.HayErrores);
 
             var equipo = equiposAnwo.FirstOrDefault(e => e.nroserie == nroserie);
             if (equipo != null)

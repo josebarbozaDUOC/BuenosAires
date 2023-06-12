@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BuenosAires.BodegaBA.ServicioStockProducto;
+using BuenosAires.BodegaBA.ServicioValidarLogin;
 
 namespace BuenosAires.BodegaBA
 {
@@ -20,12 +20,10 @@ namespace BuenosAires.BodegaBA
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            var ws = new ServicioStockProductoClient();
+            var ws = new ServicioValidarLoginClient();
             ws.InnerChannel.OperationTimeout = new TimeSpan(1, 0, 0);
-            //Respuesta respuesta = ws.VerificarPassword(txtCorreo.Text, txtContrasena.Text);
             Respuesta respuesta = ws.ValidarLoginEscritorio(txtCorreo.Text, txtContrasena.Text, "Bodeguero");
             if (respuesta.Mensaje != "") Util.MostrarMensaje(respuesta.Mensaje, respuesta.HayErrores);
-            //var autenticado = respuesta.JsonVerificarPassword.Contains("\"autenticado\": true");
             var autenticado = respuesta.JsonValidarLoginEscritorio.Contains("\"autenticado\": true");
             if (autenticado)
             {

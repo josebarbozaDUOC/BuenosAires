@@ -20,6 +20,7 @@ namespace BuenosAires.VentaBA
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            //Uso de Web Service Api Rest Ws.ValidarLogin / ValidarLoginEscritorio
             var ws = new ServicioValidarLoginClient();
             ws.InnerChannel.OperationTimeout = new TimeSpan(1, 0, 0);
             Respuesta respuesta = ws.ValidarLoginEscritorio(txtCorreo.Text, txtContrasena.Text, "Vendedor");

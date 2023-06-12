@@ -64,35 +64,29 @@
   <wsdl:message name="IServicioStockProducto_ProductosLeerTodosEnJson_OutputMessage">
     <wsdl:part name="parameters" element="tns:ProductosLeerTodosEnJsonResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicioStockProducto_PerfilUsuarioLeerTodos_InputMessage">
-    <wsdl:part name="parameters" element="tns:PerfilUsuarioLeerTodos" />
-  </wsdl:message>
-  <wsdl:message name="IServicioStockProducto_PerfilUsuarioLeerTodos_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PerfilUsuarioLeerTodosResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServicioStockProducto_VerificarPassword_InputMessage">
-    <wsdl:part name="parameters" element="tns:VerificarPassword" />
-  </wsdl:message>
-  <wsdl:message name="IServicioStockProducto_VerificarPassword_OutputMessage">
-    <wsdl:part name="parameters" element="tns:VerificarPasswordResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServicioStockProducto_ValidarLoginEscritorio_InputMessage">
-    <wsdl:part name="parameters" element="tns:ValidarLoginEscritorio" />
-  </wsdl:message>
-  <wsdl:message name="IServicioStockProducto_ValidarLoginEscritorio_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ValidarLoginEscritorioResponse" />
-  </wsdl:message>
   <wsdl:message name="IServicioStockProducto_ObtenerGuiasDespacho_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGuiasDespacho" />
   </wsdl:message>
   <wsdl:message name="IServicioStockProducto_ObtenerGuiasDespacho_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGuiasDespachoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioStockProducto_ModificarEstadoGuiaDespacho_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModificarEstadoGuiaDespacho" />
+  </wsdl:message>
+  <wsdl:message name="IServicioStockProducto_ModificarEstadoGuiaDespacho_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModificarEstadoGuiaDespachoResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioStockProducto_ObtenerEquiposAnwo_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerEquiposAnwo" />
   </wsdl:message>
   <wsdl:message name="IServicioStockProducto_ObtenerEquiposAnwo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerEquiposAnwoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioStockProducto_ReservarEquipoAnwo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReservarEquipoAnwo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioStockProducto_ReservarEquipoAnwo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReservarEquipoAnwoResponse" />
   </wsdl:message>
   <wsdl:portType name="IServicioStockProducto">
     <wsdl:operation name="ObtenerRespuesta">
@@ -131,25 +125,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/ProductosLeerTodosEnJson" message="tns:IServicioStockProducto_ProductosLeerTodosEnJson_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/ProductosLeerTodosEnJsonResponse" message="tns:IServicioStockProducto_ProductosLeerTodosEnJson_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PerfilUsuarioLeerTodos">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/PerfilUsuarioLeerTodos" message="tns:IServicioStockProducto_PerfilUsuarioLeerTodos_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/PerfilUsuarioLeerTodosResponse" message="tns:IServicioStockProducto_PerfilUsuarioLeerTodos_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="VerificarPassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/VerificarPassword" message="tns:IServicioStockProducto_VerificarPassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/VerificarPasswordResponse" message="tns:IServicioStockProducto_VerificarPassword_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ValidarLoginEscritorio">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/ValidarLoginEscritorio" message="tns:IServicioStockProducto_ValidarLoginEscritorio_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/ValidarLoginEscritorioResponse" message="tns:IServicioStockProducto_ValidarLoginEscritorio_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="ObtenerGuiasDespacho">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/ObtenerGuiasDespacho" message="tns:IServicioStockProducto_ObtenerGuiasDespacho_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/ObtenerGuiasDespachoResponse" message="tns:IServicioStockProducto_ObtenerGuiasDespacho_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ModificarEstadoGuiaDespacho">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/ModificarEstadoGuiaDespacho" message="tns:IServicioStockProducto_ModificarEstadoGuiaDespacho_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/ModificarEstadoGuiaDespachoResponse" message="tns:IServicioStockProducto_ModificarEstadoGuiaDespacho_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerEquiposAnwo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/ObtenerEquiposAnwo" message="tns:IServicioStockProducto_ObtenerEquiposAnwo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/ObtenerEquiposAnwoResponse" message="tns:IServicioStockProducto_ObtenerEquiposAnwo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReservarEquipoAnwo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioStockProducto/ReservarEquipoAnwo" message="tns:IServicioStockProducto_ReservarEquipoAnwo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioStockProducto/ReservarEquipoAnwoResponse" message="tns:IServicioStockProducto_ReservarEquipoAnwo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServicioStockProducto" type="tns:IServicioStockProducto">
@@ -235,33 +225,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PerfilUsuarioLeerTodos">
-      <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/PerfilUsuarioLeerTodos" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="VerificarPassword">
-      <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/VerificarPassword" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ValidarLoginEscritorio">
-      <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/ValidarLoginEscritorio" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ObtenerGuiasDespacho">
       <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/ObtenerGuiasDespacho" style="document" />
       <wsdl:input>
@@ -271,8 +234,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ModificarEstadoGuiaDespacho">
+      <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/ModificarEstadoGuiaDespacho" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ObtenerEquiposAnwo">
       <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/ObtenerEquiposAnwo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReservarEquipoAnwo">
+      <soap:operation soapAction="http://tempuri.org/IServicioStockProducto/ReservarEquipoAnwo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

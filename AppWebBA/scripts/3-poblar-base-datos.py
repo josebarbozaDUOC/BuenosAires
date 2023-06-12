@@ -138,28 +138,16 @@ BEGIN
 END
 """
 
-SP_ESTADO_DESPACHADO_GUIA_DE_DESPACHO = """
-CREATE PROCEDURE SP_ESTADO_DESPACHADO_GUIA_DE_DESPACHO
-    @nro VARCHAR(50)
+SP_MODIFICAR_ESTADO_GUIA_DE_DESPACHO = """
+CREATE PROCEDURE SP_MODIFICAR_ESTADO_GUIA_DE_DESPACHO
+    @nro VARCHAR(50),
+    @estado VARCHAR(50)
 AS
 BEGIN
 	SET NOCOUNT ON;
 
     Update GuiaDespacho
-    Set estadogd = 'Despachado'
-    where nrogd = @nro;
-END
-"""
-
-SP_ESTADO_ENTREGADO_GUIA_DE_DESPACHO = """
-CREATE PROCEDURE SP_ESTADO_ENTREGADO_GUIA_DE_DESPACHO
-    @nro VARCHAR(50)
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-    Update GuiaDespacho
-    Set estadogd = 'Entregado'
+    Set estadogd = @estado
     where nrogd = @nro;
 END
 """
@@ -406,12 +394,7 @@ def run():
         pass
 
     try:
-        exec_sql(SP_ESTADO_DESPACHADO_GUIA_DE_DESPACHO)
-    except:
-        pass
-
-    try:
-        exec_sql(SP_ESTADO_ENTREGADO_GUIA_DE_DESPACHO)
+        exec_sql(SP_MODIFICAR_ESTADO_GUIA_DE_DESPACHO)
     except:
         pass
 

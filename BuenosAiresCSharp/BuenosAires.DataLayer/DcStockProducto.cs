@@ -18,11 +18,13 @@ namespace BuenosAires.DataLayer
         public List<StockProducto> Lista = null;
         public List<StockProductoConEstado> ListaConEstados = null;
         public List<GuiaDespachoConEstado> ListaGuias = null;
+        public EquiposAnwo EquiposAnwo = null;
         public List<EquiposAnwo> ListaEquiposAnwo = null;
 
         public DcStockProducto()
         {
             Inicializar("");
+            ListaEquiposAnwo = new List<EquiposAnwo>();
         }
 
         private void Inicializar(string accion)
@@ -34,7 +36,8 @@ namespace BuenosAires.DataLayer
             this.Lista = null;
             this.ListaConEstados = null;
             this.ListaGuias = null;
-            this.ListaEquiposAnwo = null;
+            this.EquiposAnwo = null;
+            this.ListaEquiposAnwo = new List<EquiposAnwo>();
         }
 
         public int ContarStockProductoPorProducto(int idprod)
@@ -202,5 +205,83 @@ namespace BuenosAires.DataLayer
                 this.Mensaje = Util.MensajeError($"No fue posible {this.Accion}", ex);
             }
         }
+
+        //anwo
+        public void ObtenerEquiposAnwo()
+        {
+            this.Inicializar("obtener la lista de productos en la bodega ANWO");
+            try
+            {
+                string connectionString = "Data Source=DESKTOP-ESOHJKV\\MSSQLSERVERDUOC;Initial Catalog=base_datos;user id=sa;password=123;";
+                List<EquiposAnwo> equiposAnwo = new List<EquiposAnwo>();
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_OBTENER_EQUIPOS_ANWO", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                // Leer los valores de cada fila y crear objetos EquiposAnwo
+                                EquiposAnwo equipo = new EquiposAnwo();
+                                equipo.nroserie     = row[0].ToString();
+                                equipo.producto     = row[1].ToString();
+                                equipo.precio       = row[2].ToString();
+                                equipo.reservado    = row[3].ToString();
+
+                                equiposAnwo.Add(equipo);
+                            }
+                        }
+                    }
+                }
+                this.ListaEquiposAnwo = equiposAnwo;
+                if (this.ListaEquiposAnwo.Count == 0) this.Mensaje = "La lista de productos de la bodega ANWO se encuentra vacía";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("NullReferenceException occurred: " + ex.Message);
+                Console.WriteLine("Stack Trace: " + ex.StackTrace);
+                this.HayErrores = true;
+                this.Mensaje = Util.MensajeError($"No fue posible {this.Accion}", ex);
+            }
+        }
+
+        public void ReservarEquipoAnwo(string nroserie)
+        {
+            this.Inicializar($"reservar equipo ANWO: '{nroserie}'");
+            try
+            {
+                string connectionString = "Data Source=DESKTOP-ESOHJKV\\MSSQLSERVERDUOC;Initial Catalog=base_datos;user id=sa;password=123;";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_RESERVAR_EQUIPO_ANWO", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@nroserie", nroserie);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                this.Mensaje = $"El equipo anwo: '{nroserie}' fue reservado correctamente";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("NullReferenceException occurred: " + ex.Message);
+                Console.WriteLine("Stack Trace: " + ex.StackTrace);
+                this.HayErrores = true;
+                this.Mensaje = Util.MensajeError($"No fue posible {this.Accion}", ex);
+            }
+        }
+
     }
 }

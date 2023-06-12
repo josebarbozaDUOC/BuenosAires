@@ -5,12 +5,13 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using BuenosAires.BodegaBA.ServicioStockProducto;
 using Newtonsoft.Json;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace BuenosAires.BodegaBA
 {
     public partial class VentanaGuiasDespacho : Form
     {
-        private const string connectionString = "Data Source=DESKTOP-ESOHJKV\\MSSQLSERVERDUOC;Initial Catalog=base_datos;user id=sa;password=123;";
         private List<GuiaDespachoConEstado> guiasDespacho;
 
         public VentanaGuiasDespacho()
@@ -56,47 +57,77 @@ namespace BuenosAires.BodegaBA
             if (e.ColumnIndex == dgvGuiasDespacho.Columns["opciones"].Index)
             {
                 var guiaDespacho = (GuiaDespachoConEstado)dgvGuiasDespacho.Rows[e.RowIndex].DataBoundItem;
-
+                var nroguia = guiaDespacho.nrogd.ToString();
                 var mouseLocation = dgvGuiasDespacho.PointToClient(Cursor.Position);
                 var cellRectangle = dgvGuiasDespacho.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
 
-                if (mouseLocation.X > cellRectangle.X + 10 && mouseLocation.X < cellRectangle.X + 80)
+                if (mouseLocation.X > cellRectangle.X + 1 && mouseLocation.X < cellRectangle.X + 99)
                 {
-                    CambiarEstado("SP_ESTADO_DESPACHADO_GUIA_DE_DESPACHO", guiaDespacho.nrogd.ToString(), "Despachado");
+                    CambiarEstado(nroguia, "Despachado");
                 }
-                else if (mouseLocation.X > cellRectangle.X + 90 && mouseLocation.X < cellRectangle.X + 150)
+                else if (mouseLocation.X > cellRectangle.X + 100 && mouseLocation.X < cellRectangle.X + 179)
                 {
-                    // no se si se imprime
+                    string texto = string.Format("GUÍA DE DESPACHO "+ "\n\r" + "\n\r" +
+                        "Nro GD:      "+ guiaDespacho.nrogd.ToString()       + "\n\r" +
+                        "Producto:    "+ guiaDespacho.producto.ToString()    + "\n\r" +
+                        "Fecha:       "+ guiaDespacho.fechagd.ToString()     + "\n\r" +
+                        "Estado:      "+ guiaDespacho.estadogd.ToString()    + "\n\r" +
+                        "Nro Factura: "+ guiaDespacho.nrofac.ToString()      + "\n\r" +
+                        "Cliente:     "+ guiaDespacho.cliente.ToString());
+
+                    ImprimirTexto(texto);
                 }
-                else if (mouseLocation.X > cellRectangle.X + 160 && mouseLocation.X < cellRectangle.X + 230)
+                else if (mouseLocation.X > cellRectangle.X + 180 && mouseLocation.X < cellRectangle.X + 270)
                 {
-                    CambiarEstado("SP_ESTADO_ENTREGADO_GUIA_DE_DESPACHO", guiaDespacho.nrogd.ToString(), "Entregado");
+                    CambiarEstado(guiaDespacho.nrogd.ToString(), "Entregado");
                 }
             }
         }
 
-        private void CambiarEstado(string storedProcedure, string nro, string estado)
+        private void CambiarEstado(string nro, string estado)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+            var ws = new ServicioStockProductoClient();
+            ws.InnerChannel.OperationTimeout = new TimeSpan(1, 0, 0);
+            ws.ModificarEstadoGuiaDespacho(nro, estado);
 
-                using (SqlCommand command = new SqlCommand(storedProcedure, connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@nro", nro);
-                    command.ExecuteNonQuery();
-                }
-            }
-
-            // Actualiza la guia de despacho
             var guiaDespacho = guiasDespacho.Find(g => g.nrogd.ToString() == nro);
             if (guiaDespacho != null)
             {
                 guiaDespacho.estadogd = estado;
             }
-
             dgvGuiasDespacho.Refresh();
+        }
+
+        private void ImprimirTexto(string texto)
+        {
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += (sender, e) => ImprimirPagina(sender, e, texto);
+
+            // Configurar los márgenes
+            pd.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50); // Márgenes de 50 unidades en todos los lados
+
+            // Mostrar la vista previa del documento
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+            printPreviewDialog.Document = pd;
+
+            // Ajustar el tamaño de la ventana de la vista previa
+            printPreviewDialog.ClientSize = new Size(600, 1000); // Tamaño deseado para el visualizador del documento
+            printPreviewDialog.StartPosition = FormStartPosition.CenterScreen;
+            printPreviewDialog.ShowDialog();
+        }
+        private void ImprimirPagina(object sender, PrintPageEventArgs e, string texto)
+        {
+            // Definir la fuente y el formato
+            Font fuente = new Font("Arial", 12);
+            StringFormat formato = new StringFormat();
+
+            // Obtener los márgenes de la página
+            Margins margenes = ((PrintDocument)sender).DefaultPageSettings.Margins;
+            float x = margenes.Left;
+            float y = margenes.Top;
+
+            // Dibujar el texto en la página con los márgenes aplicados
+            e.Graphics.DrawString(texto, fuente, Brushes.Black, new PointF(x, y), formato);
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

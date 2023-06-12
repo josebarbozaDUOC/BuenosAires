@@ -12,5 +12,9 @@
         public string producto { get; set; }
         public string precio { get; set; }
         public string reservado { get; set; }
+
+        public EquiposAnwo()
+        {
+        }
     }
 }
