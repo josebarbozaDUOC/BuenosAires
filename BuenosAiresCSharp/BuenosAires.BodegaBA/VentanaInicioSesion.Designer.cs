@@ -37,7 +37,11 @@ namespace BuenosAires.BodegaBA
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtMensaje = new System.Windows.Forms.Label();
+            this.pnlMensaje = new System.Windows.Forms.Panel();
+            this.checkBoxChangeColor = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
+            this.pnlMensaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -128,24 +132,62 @@ namespace BuenosAires.BodegaBA
             this.panel1.Size = new System.Drawing.Size(465, 270);
             this.panel1.TabIndex = 13;
             // 
+            // txtMensaje
+            // 
+            this.txtMensaje.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtMensaje.Font = new System.Drawing.Font("Ode to Idle Gaming", 10F);
+            this.txtMensaje.Location = new System.Drawing.Point(0, 0);
+            this.txtMensaje.Name = "txtMensaje";
+            this.txtMensaje.Size = new System.Drawing.Size(465, 62);
+            this.txtMensaje.TabIndex = 14;
+            this.txtMensaje.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pnlMensaje
+            // 
+            this.pnlMensaje.BackColor = System.Drawing.Color.Salmon;
+            this.pnlMensaje.Controls.Add(this.txtMensaje);
+            this.pnlMensaje.Location = new System.Drawing.Point(356, 211);
+            this.pnlMensaje.Name = "pnlMensaje";
+            this.pnlMensaje.Size = new System.Drawing.Size(465, 62);
+            this.pnlMensaje.TabIndex = 15;
+            this.pnlMensaje.Visible = false;
+            // 
+            // checkBoxChangeColor
+            // 
+            this.checkBoxChangeColor.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxChangeColor.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.checkBoxChangeColor.FlatAppearance.CheckedBackColor = System.Drawing.Color.Salmon;
+            this.checkBoxChangeColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxChangeColor.Font = new System.Drawing.Font("Ode to Idle Gaming", 10F);
+            this.checkBoxChangeColor.Location = new System.Drawing.Point(1018, 12);
+            this.checkBoxChangeColor.Name = "checkBoxChangeColor";
+            this.checkBoxChangeColor.Size = new System.Drawing.Size(151, 39);
+            this.checkBoxChangeColor.TabIndex = 16;
+            this.checkBoxChangeColor.Text = "checkBox1";
+            this.checkBoxChangeColor.UseVisualStyleBackColor = false;
+            this.checkBoxChangeColor.CheckedChanged += new System.EventHandler(this.checkBoxChangeColor_CheckedChanged);
+            // 
             // VentanaInicioSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1181, 753);
+            this.Controls.Add(this.checkBoxChangeColor);
+            this.Controls.Add(this.pnlMensaje);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtContrasena);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "VentanaInicioSesion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaInicioSesion";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlMensaje.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,5 +203,8 @@ namespace BuenosAires.BodegaBA
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label txtMensaje;
+        private System.Windows.Forms.Panel pnlMensaje;
+        private System.Windows.Forms.CheckBox checkBoxChangeColor;
     }
 }

@@ -41,3 +41,4 @@ C:\BuenosAires\BuenosAiresCSharp\BuenosAires.BodegaBA\bin\Debug\Newtonsoft.Json.
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.BodegaBA\obj\Debug\BuenosAires.BodegaBA.csproj.CopyComplete
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.BodegaBA\obj\Debug\BuenosAires.BodegaBA.exe
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.BodegaBA\obj\Debug\BuenosAires.BodegaBA.pdb
+C:\BuenosAires\BuenosAiresCSharp\BuenosAires.BodegaBA\obj\Debug\BuenosAires.BodegaBA.csproj.AssemblyReference.cache

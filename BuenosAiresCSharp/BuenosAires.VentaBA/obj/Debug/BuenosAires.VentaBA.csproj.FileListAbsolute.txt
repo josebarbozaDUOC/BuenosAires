@@ -26,3 +26,4 @@ C:\BuenosAires\BuenosAiresCSharp\BuenosAires.VentaBA\obj\Debug\BuenosAires.Venta
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.VentaBA\obj\Debug\BuenosAires.VentaBA.csproj.CopyComplete
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.VentaBA\obj\Debug\BuenosAires.VentaBA.exe
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.VentaBA\obj\Debug\BuenosAires.VentaBA.pdb
+C:\BuenosAires\BuenosAiresCSharp\BuenosAires.VentaBA\obj\Debug\BuenosAires.VentaBA.csproj.AssemblyReference.cache

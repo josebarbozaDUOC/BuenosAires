@@ -19,3 +19,4 @@ C:\BuenosAires\BuenosAiresCSharp\BuenosAires.Model\obj\Debug\BuenosAires.Model.c
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.Model\obj\Debug\BuenosAires.Model.csproj.CopyComplete
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.Model\obj\Debug\BuenosAires.Model.dll
 C:\BuenosAires\BuenosAiresCSharp\BuenosAires.Model\obj\Debug\BuenosAires.Model.pdb
+C:\BuenosAires\BuenosAiresCSharp\BuenosAires.Model\obj\Debug\BuenosAires.Model.csproj.AssemblyReference.cache

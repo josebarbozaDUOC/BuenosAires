@@ -18,7 +18,7 @@ namespace BuenosAires.VentaBA
             InitializeComponent();
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private async void btnIngresar_Click(object sender, EventArgs e)
         {
             //Uso de Web Service Api Rest Ws.ValidarLogin / ValidarLoginEscritorio
             var ws = new ServicioValidarLoginClient();
@@ -28,12 +28,26 @@ namespace BuenosAires.VentaBA
             var autenticado = respuesta.JsonValidarLoginEscritorio.Contains("\"autenticado\": true");
             if (autenticado)
             {
-                Util.MostrarMensajeInformativo("Autenticado correctamente");
+                this.MostrarMensaje(true, "Autenticado correctamente");
+                await Task.Delay(2000);
+                this.MostrarMensaje(false, "");
+                //Util.MostrarMensajeInformativo("Autenticado correctamente");
                 var ventana = new VentanaPrincipal();
                 ventana.Show();
                 this.Hide();
             }
-            else Util.MostrarMensajeInformativo("La cuenta o la contraseña son incorrectos");
+            else
+            {
+                this.MostrarMensaje(true, "La cuenta o la contraseña son incorrectos");
+                await Task.Delay(2000);
+                this.MostrarMensaje(false, "");
+                //Util.MostrarMensajeInformativo("La cuenta o la contraseña son incorrectos");
+            }
+        }
+        private void MostrarMensaje(bool panel, string mensaje)
+        {
+            pnlMensaje.Visible = panel;
+            txtMensaje.Text = mensaje;
         }
     }
 }
