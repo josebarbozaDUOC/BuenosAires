@@ -204,7 +204,6 @@ def pago_exitoso(request, id):
         }                 
 
         # Se guarda en DB usando el procedimiento almacenado SP_COMPRA
-        # Para la compra de un producto: "nrofac", "nrogd" o "nrosol", se le puede pasar un "0", el SP se encarga de asignar el nro correcto
         cursor = connection.cursor()
         cursor.execute(
             "EXEC SP_COMPRA @nrofac=%s, @rutcli=%s, @idprod=%s, @descfac=%s, @monto=%s, @nrogd=%s, @nrosol=%s, @tiposol=%s, @fechavisita=%s, @ruttec=%s, @descsol=%s",
@@ -350,26 +349,17 @@ def solicitudservicios(request, action, id):
         if form.is_valid():
             
             perfil = PerfilUsuario.objects.get(user = request.user)
-            factura = Factura.objects.filter(rutcli = perfil.rut)
-            
-            solicitud = form.cleaned_data
-            
-            nrosol = random.randrange(1000)
-            facturanro = random.choices(factura)
-            nrofac = facturanro[0]                    
+            solicitud = form.cleaned_data                
             tiposol = solicitud.get('tiposol')
             fechavisita = solicitud.get('fechavisita')
-            
-            ruttec = PerfilUsuario.objects.get(rut = '7777-7')
             descsol = solicitud.get('descsol')
-            estadosol = 'Aceptada'
 
+            # Se guarda en DB usando el procedimiento almacenado SP_COMPRA
             cursor = connection.cursor()
             cursor.execute(
             "EXEC SP_COMPRA @nrofac=%s, @rutcli=%s, @idprod=%s, @descfac=%s, @monto=%s, @nrogd=%s, @nrosol=%s, @tiposol=%s, @fechavisita=%s, @ruttec=%s, @descsol=%s",
-            [0, perfil.rut, id, '', 25000, 0, 0, tiposol, fechavisita, '', ''])
-            
-            #SolicitudServicio.objects.create(nrosol=nrosol, nrofac=nrofac, tiposol=tiposol, fechavisita=fechavisita, ruttec=ruttec, descsol=descsol, estadosol=estadosol)           
+            [0, perfil.rut, None, '', 25000, 0, 0, tiposol, fechavisita, '', descsol])
+                  
     '''
     if action == 'ins':
         if request.method == "POST":

@@ -38,7 +38,7 @@ class Producto(models.Model):
 class Factura(models.Model):
     nrofac = models.IntegerField(primary_key=True)
     rutcli = models.ForeignKey(PerfilUsuario, models.DO_NOTHING, db_column='rutcli', null=False, blank=False)
-    idprod = models.ForeignKey(Producto, models.DO_NOTHING, db_column='idprod', null=False, blank=False)
+    idprod = models.ForeignKey(Producto, models.DO_NOTHING, db_column='idprod', null=True, blank=False) #puede ser nulo
     fechafac = models.DateField(null=False, blank=False)
     descfac = models.CharField(max_length=300, null=False, blank=False)
     monto = models.IntegerField(null=False, blank=False)

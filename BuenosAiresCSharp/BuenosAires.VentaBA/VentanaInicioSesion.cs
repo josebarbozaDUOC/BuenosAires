@@ -24,7 +24,7 @@ namespace BuenosAires.VentaBA
             var ws = new ServicioValidarLoginClient();
             ws.InnerChannel.OperationTimeout = new TimeSpan(1, 0, 0);
             Respuesta respuesta = ws.ValidarLoginEscritorio(txtCorreo.Text, txtContrasena.Text, "Vendedor");
-            if (respuesta.Mensaje != "") Util.MostrarMensaje(respuesta.Mensaje, respuesta.HayErrores);
+            //if (respuesta.Mensaje != "") Util.MostrarMensaje(respuesta.Mensaje, respuesta.HayErrores);
             var autenticado = respuesta.JsonValidarLoginEscritorio.Contains("\"autenticado\": true");
             if (autenticado)
             {
