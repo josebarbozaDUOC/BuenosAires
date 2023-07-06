@@ -108,7 +108,8 @@ def ficha(request, id):
     # Si se tata de un CLIENTE REGISTRADO, se redirecciona a la vista "iniciar_pago"
     if request.method == "POST":
         if request.user.is_authenticated and not request.user.is_staff:
-            return redirect(iniciar_pago, id)
+            
+            return redirect(iniciar_pago, int(id))
         else:
             # Si el usuario que hace la compra no ha iniciado sesión,
             # entonces se le envía un mensaje en la pagina para indicarle
@@ -139,7 +140,12 @@ def iniciar_pago(request, id):
     print("Webpay Plus Transaction.create")
     buy_order = str(random.randrange(1000000, 99999999))
     session_id = request.user.username
-    amount = Producto.objects.get(idprod=id).precio
+
+    if (int(id) > int(0)):
+        amount = Producto.objects.get(idprod=id).precio
+    else:
+        amount=25000
+        
     return_url = 'http://127.0.0.1:8000/pago_exitoso/'+ id
 
     # response = Transaction.create(buy_order, session_id, amount, return_url)
@@ -203,11 +209,28 @@ def pago_exitoso(request, id):
             "response_code": response['response_code']
         }                 
 
+        '''ERROR POR ACÁ, NO PESCA EL TEMA DE LA DESCRIPCION DE FACTURA
+        IntegrityError at /pago_exitoso/0
+        ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]
+        Cannot insert the value NULL into column 'descfac', table 'base_datos.dbo.Factura'; 
+        column does not allow nulls. INSERT fails. (515) (SQLExecDirectW); [23000] 
+        [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")'''
+
+        #4051885600446623
         # Se guarda en DB usando el procedimiento almacenado SP_COMPRA
         cursor = connection.cursor()
-        cursor.execute(
-            "EXEC SP_COMPRA @nrofac=%s, @rutcli=%s, @idprod=%s, @descfac=%s, @monto=%s, @nrogd=%s, @nrosol=%s, @tiposol=%s, @fechavisita=%s, @ruttec=%s, @descsol=%s",
-            [0, perfil.rut, id, '', response['amount'], 0, 0, 'Instalación', '', '', ''])
+        if (int(id) > int(0)):
+            cursor.execute(
+                "EXEC SP_COMPRA @nrofac=%s, @rutcli=%s, @idprod=%s, @descfac=%s, @monto=%s, @nrogd=%s, @nrosol=%s, @tiposol=%s, @fechavisita=%s, @ruttec=%s, @descsol=%s",
+                [0, perfil.rut, id, '', response['amount'], 0, 0, 'Instalación', '', '', ''])
+        else:
+            tiposol     = request.session.get('tiposol')
+            fechavisita = request.session.get('fechavisita')
+            descsol     = request.session.get('descsol')
+
+            cursor.execute(
+                "EXEC SP_COMPRA @nrofac=%s, @rutcli=%s, @idprod=%s, @descfac=%s, @monto=%s, @nrogd=%s, @nrosol=%s, @tiposol=%s, @fechavisita=%s, @ruttec=%s, @descsol=%s",
+                [0, perfil.rut, None, tiposol, 25000, 0, 0, tiposol, fechavisita, '', descsol])
 
         return render(request, "core/pago_exitoso.html", context)
     else:
@@ -354,11 +377,13 @@ def solicitudservicios(request, action, id):
             fechavisita = solicitud.get('fechavisita')
             descsol = solicitud.get('descsol')
 
-            # Se guarda en DB usando el procedimiento almacenado SP_COMPRA
-            cursor = connection.cursor()
-            cursor.execute(
-            "EXEC SP_COMPRA @nrofac=%s, @rutcli=%s, @idprod=%s, @descfac=%s, @monto=%s, @nrogd=%s, @nrosol=%s, @tiposol=%s, @fechavisita=%s, @ruttec=%s, @descsol=%s",
-            [0, perfil.rut, None, '', 25000, 0, 0, tiposol, fechavisita, '', descsol])
+            request.session['name'] = tiposol
+            request.session['email'] = fechavisita
+            request.session['email'] = descsol
+
+            if request.user.is_authenticated and not request.user.is_staff:
+                return redirect(iniciar_pago, 0)
+            else: data["mesg"] = "¡Para poder comprar debe iniciar sesión como cliente!"
                   
     '''
     if action == 'ins':
