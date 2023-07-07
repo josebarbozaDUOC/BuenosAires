@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Producto, PerfilUsuario, SolicitudServicio, Factura
 from django.forms.widgets import HiddenInput
+from datetime import datetime
 
 class ProductoForm(ModelForm):
     class Meta:
@@ -35,11 +36,22 @@ class PerfilUsuarioForm(Form):
     class Meta:
         fields = '__all__'
         
-class SolicitudServicioForm(Form):
+class SolicitudServicioForm(forms.Form):
     TIPOSOL_CHOICES = [
         ('Mantención', 'Mantención'),
         ('Reparación', 'Reparación'),
     ]
-    tiposol = forms.ChoiceField(choices = TIPOSOL_CHOICES)
+    tiposol = forms.ChoiceField(choices=TIPOSOL_CHOICES)
     fechavisita = forms.DateField(widget=forms.SelectDateWidget())
     descsol = forms.CharField(max_length=200)
+
+    def __init__(self, *args, **kwargs):
+        initial = kwargs.get('initial', {})
+        if 'fechavisita' in initial:
+            initial['fechavisita'] = initial['fechavisita'].isoformat()
+        kwargs['initial'] = initial
+        super().__init__(*args, **kwargs)
+
+    def clean_fechavisita(self):
+        fechavisita = self.cleaned_data['fechavisita']
+        return fechavisita

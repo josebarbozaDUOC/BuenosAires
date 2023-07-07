@@ -40,7 +40,7 @@ class Factura(models.Model):
     rutcli = models.ForeignKey(PerfilUsuario, models.DO_NOTHING, db_column='rutcli', null=False, blank=False)
     idprod = models.ForeignKey(Producto, models.DO_NOTHING, db_column='idprod', null=True, blank=False) #puede ser nulo
     fechafac = models.DateField(null=False, blank=False)
-    descfac = models.CharField(max_length=300, null=False, blank=False)
+    descfac = models.CharField(max_length=300, null=True, blank=False) #puede ser nulo?
     monto = models.IntegerField(null=False, blank=False)
 
     class Meta:

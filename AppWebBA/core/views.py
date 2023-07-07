@@ -11,7 +11,7 @@ from django.db import connection
 import random
 import requests
 import datetime
-
+from datetime import datetime
 
 def home(request):
     return render(request, "core/home.html")
@@ -209,13 +209,6 @@ def pago_exitoso(request, id):
             "response_code": response['response_code']
         }                 
 
-        '''ERROR POR ACÁ, NO PESCA EL TEMA DE LA DESCRIPCION DE FACTURA
-        IntegrityError at /pago_exitoso/0
-        ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]
-        Cannot insert the value NULL into column 'descfac', table 'base_datos.dbo.Factura'; 
-        column does not allow nulls. INSERT fails. (515) (SQLExecDirectW); [23000] 
-        [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The statement has been terminated. (3621)")'''
-
         #4051885600446623
         # Se guarda en DB usando el procedimiento almacenado SP_COMPRA
         cursor = connection.cursor()
@@ -370,16 +363,13 @@ def solicitudservicios(request, action, id):
     if request.method == "POST":
         form = SolicitudServicioForm(request.POST, request.FILES)
         if form.is_valid():
-            
-            perfil = PerfilUsuario.objects.get(user = request.user)
-            solicitud = form.cleaned_data                
-            tiposol = solicitud.get('tiposol')
-            fechavisita = solicitud.get('fechavisita')
-            descsol = solicitud.get('descsol')
-
-            request.session['name'] = tiposol
-            request.session['email'] = fechavisita
-            request.session['email'] = descsol
+            tiposol     = form.cleaned_data['tiposol']
+            fechavisita = form.cleaned_data['fechavisita']
+            descsol     = form.cleaned_data['descsol']
+            fechavisita_str = fechavisita.isoformat()
+            request.session['tiposol']      = tiposol
+            request.session['fechavisita'] = fechavisita_str
+            request.session['descsol']      = descsol
 
             if request.user.is_authenticated and not request.user.is_staff:
                 return redirect(iniciar_pago, 0)
