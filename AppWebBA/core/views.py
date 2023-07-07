@@ -375,7 +375,7 @@ def solicitudservicios(request, action, id):
                 return redirect(iniciar_pago, 0)
             else: data["mesg"] = "¡Para poder comprar debe iniciar sesión como cliente!"
                   
-    '''
+    
     if action == 'ins':
         if request.method == "POST":
             
@@ -406,7 +406,7 @@ def solicitudservicios(request, action, id):
             return redirect(solicitudservicios, action='ins', id = '-1')
         except:
             data["mesg"] = "¡La solicitud ya fue eliminada!"
-    '''
+    
 
     data["list"] = SolicitudServicio.objects.all().order_by('nrosol')
     return render(request, "core/ingresarsolicitud.html", data)

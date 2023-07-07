@@ -7,16 +7,8 @@ CREATE PROCEDURE SP_OBTENER_SOLICITUDES_DE_SERVICIO
 	@rut     VARCHAR(50)
 AS
 BEGIN
-	/*
-		Ejemplos de ejecución del procedimiento:
-		EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO 'Técnico', '6666-6'
-		EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO 'Técnico', '7777-7'
-		EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO 'Técnico', '8888-8'
-		EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO 'Cliente', '1111-1'
-		EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO 'Todos', ''
-	*/
 
-	IF (@tipousu = 'Técnico')
+	IF (@tipousu = 'Tï¿½cnico')
 		SELECT 
 			sol.nrosol, 
 			usucli.first_name + ' '  + usucli.last_name AS nomcli, 
@@ -60,7 +52,7 @@ BEGIN
 		ORDER BY 
 			usutec.first_name
 
-	IF (@tipousu = 'Todos')
+	IF (@tipousu = 'Administrador')
 		SELECT 
 			sol.nrosol, 
 			usucli.first_name + ' '  + usucli.last_name AS nomcli, 
